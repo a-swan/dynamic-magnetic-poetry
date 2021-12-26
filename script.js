@@ -78,9 +78,13 @@ function parseWords() {
 }
 
 function clearBlocks() {
-  const parent = document.querySelector("#word-bin");
+  const wordParent = document.querySelector("#word-bin").childNodes;
 
-  console.log(parent);
+  console.log(wordParent);
+  
+  for(let i = 0; i<wordParent.length; i++){
+    
+  }
 }
 
 function makeWordBlock(text) {}
