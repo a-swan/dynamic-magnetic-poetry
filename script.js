@@ -57,19 +57,20 @@ function parseWords(){
   //remove punctuation & split by " "
   const wordList = document.getElementById("target-words").value.replaceAll(/[\.,-\/#!$%'"^&*;:{}=_`~()-]/gm, "").split(" ");
 
-  const parent = clearWordBlocks();
-  
-  for(let z = 0; z < wordList.length; z++){
-    let outerDiv = document.createElement("DIV");
-    outerDiv.className = "word";
-    outerDiv.id = "word-"+z;
-    let innerP = document.createElement("P");
-    let textNode = document.createTextNode(wordList[z]);
+  console.log(wordList);
+  clearWordBlocks();
+
+//   for(let z = 0; z < wordList.length; z++){
+//     let outerDiv = document.createElement("DIV");
+//     outerDiv.className = "word";
+//     outerDiv.id = "word-"+z;
+//     let innerP = document.createElement("P");
+//     let textNode = document.createTextNode(wordList[z]);
     
-    innerP.appendChild(textNode);
-    outerDiv.appendChild(innerP);
-    parent.appendChild(outerDiv);
-  }
+//     innerP.appendChild(textNode);
+//     outerDiv.appendChild(innerP);
+//     parent.appendChild(outerDiv);
+//   }
   
   updateWords();
 }
@@ -88,7 +89,14 @@ function clearWordBlocks(){
   
 //   return parent;
   
-  document.getElementsByClassName("")
+  const parent = document.getElementById("word-bin");
+  
+  console.log(JSON.stringify(parent));
+  // parent.innerHTML = '';
+  // console.log(parent.firstChild);
+  // while(parent.firstChild){
+  //   parent.removeChild(parent.firstChild);
+  // }
 }
 
 function makeWordBlock(text){
