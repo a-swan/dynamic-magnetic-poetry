@@ -1,27 +1,96 @@
-/*
-This is your site JavaScript code - you can add interactivity and carry out processing
-- Initially the JS writes a message to the console, and moves a button you can add from the README
-*/
+updateWords();
 
-// Print a message in the browser's dev tools console each time the page loads
-// Use your menus or right-click / control-click and choose "Inspect" > "Console"
-console.log("Hello 🌎");
+function updateWords(){
+  const words = document.getElementsByClassName("word");
 
-/* 
-Make the "Click me!" button move when the visitor clicks it:
-- First add the button to the page by following the "Next steps" in the README
-*/
-const btn = document.querySelector("button"); // Get the button from the page
-// Detect clicks on the button
-if (btn) {
-  btn.onclick = function() {
-    // The JS works in conjunction with the 'dipped' code in style.css
-    btn.classList.toggle("dipped");
-  };
+  for(let i = 0; i<words.length; i++){
+    dragElement(words[i]);
+  }
 }
 
-// This is a single line JS comment
-/*
-This is a comment that can span multiple lines 
-- use comments to make your own notes!
-*/
+function dragElement(elmnt) {
+  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  
+  if (document.getElementById(elmnt.id)) {
+    // if present, the header is where you move the DIV from:
+    document.getElementById(elmnt.id).onmousedown = dragMouseDown;
+    
+  } else {
+    // otherwise, move the DIV from anywhere inside the DIV:
+    elmnt.onmousedown = dragMouseDown;
+  }
+
+  function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // get the mouse cursor position at startup:
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    // call a function whenever the cursor moves:
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // calculate the new cursor position:
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // set the element's new position:
+    elmnt.style.zIndex = 1;
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+  }
+
+  function closeDragElement() {
+    // stop moving when mouse button is released:
+    document.onmouseup = null;
+    document.onmousemove = null;
+    elmnt.style.zIndex = 0;
+  }
+}
+
+function parseWords(){  
+  //remove punctuation & split by " "
+  const wordList = document.getElementById("target-words").value.replaceAll(/[\.,-\/#!$%'"^&*;:{}=_`~()-]/gm, "").split(" ");
+
+  const parent = clearWordBlocks();
+  
+  for(let z = 0; z < wordList.length; z++){
+    let outerDiv = document.createElement("DIV");
+    outerDiv.className = "word";
+    outerDiv.id = "word-"+z;
+    let innerP = document.createElement("P");
+    let textNode = document.createTextNode(wordList[z]);
+    
+    innerP.appendChild(textNode);
+    outerDiv.appendChild(innerP);
+    parent.appendChild(outerDiv);
+  }
+  
+  updateWords();
+}
+
+function clearWordBlocks(){
+//   const tmp = document.getElementsByClassName("word");
+//   const parent = tmp[0].parentElement;
+  
+//   console.log(parent);
+//   console.log(tmp.length);
+//   for(let i = 0; i < tmp.length; i++){
+//     console.log(i)
+//     console.log('Removing ' + tmp[i] + '/' + tmp.length);
+//     tmp[i].parentElement.removeChild(tmp[i]);
+//   }
+  
+//   return parent;
+  
+  document.getElementsByClassName("")
+}
+
+function makeWordBlock(text){
+  
+}

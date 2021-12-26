@@ -182,3 +182,23 @@ h2 {
 .dipped {
   transform: translateY(5px);
 }
+
+/*
+CUSTOM CSS
+*/
+
+.word{
+  border: 1px solid black;
+  cursor: move;
+  position: absolute;
+  background-color: white;
+  z-index: 0;
+}
+
+.word-input{
+  float:right;
+}
+
+textarea{
+  resize: none;
+}
