@@ -1,20 +1,22 @@
 updateWords();
 
-function updateWords(){
+function updateWords() {
   const words = document.getElementsByClassName("word");
 
-  for(let i = 0; i<words.length; i++){
+  for (let i = 0; i < words.length; i++) {
     dragElement(words[i]);
   }
 }
 
 function dragElement(elmnt) {
-  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-  
+  var pos1 = 0,
+    pos2 = 0,
+    pos3 = 0,
+    pos4 = 0;
+
   if (document.getElementById(elmnt.id)) {
     // if present, the header is where you move the DIV from:
     document.getElementById(elmnt.id).onmousedown = dragMouseDown;
-    
   } else {
     // otherwise, move the DIV from anywhere inside the DIV:
     elmnt.onmousedown = dragMouseDown;
@@ -41,8 +43,8 @@ function dragElement(elmnt) {
     pos4 = e.clientY;
     // set the element's new position:
     elmnt.style.zIndex = 1;
-    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+    elmnt.style.top = elmnt.offsetTop - pos2 + "px";
+    elmnt.style.left = elmnt.offsetLeft - pos1 + "px";
   }
 
   function closeDragElement() {
@@ -53,52 +55,32 @@ function dragElement(elmnt) {
   }
 }
 
-function parseWords(){  
+function parseWords() {
   //remove punctuation & split by " "
-  const wordList = document.getElementById("target-words").value.replaceAll(/[\.,-\/#!$%'"^&*;:{}=_`~()-]/gm, "").split(" ");
+  const wordList = document
+    .getElementById("target-words")
+    .value.replaceAll(/[\.,-\/#!$%'"^&*;:{}=_`~()-]/gm, "")
+    .split(" ");
+  clearBlocks();
+  // updateWords();
 
-  console.log(wordList);
-  clearWordBlocks();
+  //   for(let z = 0; z < wordList.length; z++){
+  //     let outerDiv = document.createElement("DIV");
+  //     outerDiv.className = "word";
+  //     outerDiv.id = "word-"+z;
+  //     let innerP = document.createElement("P");
+  //     let textNode = document.createTextNode(wordList[z]);
 
-//   for(let z = 0; z < wordList.length; z++){
-//     let outerDiv = document.createElement("DIV");
-//     outerDiv.className = "word";
-//     outerDiv.id = "word-"+z;
-//     let innerP = document.createElement("P");
-//     let textNode = document.createTextNode(wordList[z]);
-    
-//     innerP.appendChild(textNode);
-//     outerDiv.appendChild(innerP);
-//     parent.appendChild(outerDiv);
-//   }
-  
-  updateWords();
+  //     innerP.appendChild(textNode);
+  //     outerDiv.appendChild(innerP);
+  //     parent.appendChild(outerDiv);
+  //   }
 }
 
-function clearWordBlocks(){
-//   const tmp = document.getElementsByClassName("word");
-//   const parent = tmp[0].parentElement;
-  
-//   console.log(parent);
-//   console.log(tmp.length);
-//   for(let i = 0; i < tmp.length; i++){
-//     console.log(i)
-//     console.log('Removing ' + tmp[i] + '/' + tmp.length);
-//     tmp[i].parentElement.removeChild(tmp[i]);
-//   }
-  
-//   return parent;
-  
-  const parent = document.getElementById("word-bin");
-  
-  console.log(JSON.stringify(parent));
-  // parent.innerHTML = '';
-  // console.log(parent.firstChild);
-  // while(parent.firstChild){
-  //   parent.removeChild(parent.firstChild);
-  // }
+function clearBlocks() {
+  const parent = document.querySelector("#word-bin");
+
+  console.log(parent);
 }
 
-function makeWordBlock(text){
-  
-}
+function makeWordBlock(text) {}
