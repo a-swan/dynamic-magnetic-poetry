@@ -1,4 +1,5 @@
-updateWords();
+// updateWords();
+parseWords();
 
 function updateWords() {
   const words = document.getElementsByClassName("word");
@@ -62,29 +63,31 @@ function parseWords() {
     .value.replaceAll(/[\.,-\/#!$%'"^&*;:{}=_`~()-]/gm, "")
     .split(" ");
   clearBlocks();
-  // updateWords();
-
-  //   for(let z = 0; z < wordList.length; z++){
-  //     let outerDiv = document.createElement("DIV");
-  //     outerDiv.className = "word";
-  //     outerDiv.id = "word-"+z;
-  //     let innerP = document.createElement("P");
-  //     let textNode = document.createTextNode(wordList[z]);
-
-  //     innerP.appendChild(textNode);
-  //     outerDiv.appendChild(innerP);
-  //     parent.appendChild(outerDiv);
-  //   }
+  
+  const wordBin = document.getElementById("word-bin");
+  for(let z = 0; z < wordList.length; z++){
+    wordBin.appendChild(makeWordBlock(wordList[z], z));
+  }
+  
+  updateWords();
 }
 
 function clearBlocks() {
-  const wordParent = document.querySelector("#word-bin").childNodes;
-
-  console.log(wordParent);
+  const wordBlocks = document.getElementsByClassName("word");
   
-  for(let i = 0; i<wordParent.length; i++){
-    
+  while(wordBlocks.length > 0){
+    wordBlocks[0].remove();
   }
 }
 
-function makeWordBlock(text) {}
+function makeWordBlock(text, iter) {
+      let outerDiv = document.createElement("DIV");
+      outerDiv.className = "word";
+      outerDiv.id = "word-"+iter;
+      let innerP = document.createElement("P");
+      let textNode = document.createTextNode(text);
+
+      innerP.appendChild(textNode);
+      outerDiv.appendChild(innerP);
+      return outerDiv;
+}
