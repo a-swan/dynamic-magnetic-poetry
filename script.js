@@ -113,15 +113,3 @@ function makeWordBlock(text, iter) {
   outerDiv.appendChild(innerP);
   return outerDiv;
 }
-
-function saveData(){
-  const words = document.getElementsByClassName("word");
-
-  const wordBlockData = []
-  for(let i = 0; i<words.length; i++){
-    wordBlockData.push({text: words[i].innerText, top: words[i].offsetTop, left: words[i].offsetLeft});
-  }
-
-  console.log(JSON.stringify(wordBlockData));
-  localStorage.setItem('test', JSON.stringify(wordBlockData));
-}
