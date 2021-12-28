@@ -190,6 +190,12 @@ body{
   height: 2000px;
 }
 
+nav{
+  margin-bottom: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
 .word{
   border: 1px solid black;
   cursor: move;
