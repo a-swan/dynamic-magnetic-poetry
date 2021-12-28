@@ -1,12 +1,33 @@
 // updateWords();
-parseWords();
+// parseWords();
+
+function showModal(){
+  const modal = document.getElementById('word-input');
+  modal.style.display = 'block';
+}
+
+function hideModal(){
+  const modal = document.getElementById('word-input');
+  modal.style.display = 'none';
+}
 
 function updateWords() {
   const words = document.getElementsByClassName("word");
 
   for (let i = 0; i < words.length; i++) {
+    if(i > 0){
+      if(words[i-1].offsetLeft + words[i-1].offsetWidth + words[i].offsetWidth < window.innerWidth){
+        words[i].style.left = Number(words[i-1].offsetLeft + words[i-1].offsetWidth + 8) + "px";
+        words[i].style.top = words[i-1].offsetTop + "px";
+      }
+      else{
+        words[i].style.top = Number(words[i-1].offsetTop + words[i-1].offsetHeight + 8) + "px";
+      }
+    } 
     dragElement(words[i]);
   }
+
+  hideModal();
 }
 
 function dragElement(elmnt) {
@@ -60,7 +81,8 @@ function parseWords() {
   //remove punctuation & split by " "
   const wordList = document
     .getElementById("target-words")
-    .value.replaceAll(/[\.,-\/#!$%'"^&*;:{}=_`~()-]/gm, "")
+    .value.replaceAll(/[\.,-\/#!$%'"^&*;:{}=_`~()]/gm, "")
+    .replaceAll(/(\r\n|\n|\r)/gm, " ")
     .split(" ");
   clearBlocks();
   
@@ -81,13 +103,13 @@ function clearBlocks() {
 }
 
 function makeWordBlock(text, iter) {
-      let outerDiv = document.createElement("DIV");
-      outerDiv.className = "word";
-      outerDiv.id = "word-"+iter;
-      let innerP = document.createElement("P");
-      let textNode = document.createTextNode(text);
+  let outerDiv = document.createElement("DIV");
+  outerDiv.className = "word";
+  outerDiv.id = "word-"+iter;
+  let innerP = document.createElement("P");
+  let textNode = document.createTextNode(text);
 
-      innerP.appendChild(textNode);
-      outerDiv.appendChild(innerP);
-      return outerDiv;
+  innerP.appendChild(textNode);
+  outerDiv.appendChild(innerP);
+  return outerDiv;
 }
