@@ -222,3 +222,7 @@ nav{
 #word-input{
   float:right;
 }
+
+textarea{
+  /* resize: none; */
+}
