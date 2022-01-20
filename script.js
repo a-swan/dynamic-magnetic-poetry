@@ -107,7 +107,7 @@ function makeWordBlock(text, iter) {
   outerDiv.className = "word";
   outerDiv.id = "word-"+iter;
   let innerP = document.createElement("P");
-  let textNode = document.createTextNode(text);
+  let textNode = document.createTextNode('\u00A0'+text+'\u00A0');
 
   innerP.appendChild(textNode);
   outerDiv.appendChild(innerP);
